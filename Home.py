@@ -130,17 +130,17 @@ def fishRxData():
                 item = {'fish_type': fishselected[i], 'fish_count': j, 'fish_size': fishsize}
                 databasetx.append(item)
 
-    st.write(databasetx)
+    # st.write(databasetx)
     print("----------------------------------------------------------------------------------------------------------")
     # databasetxAcc = 
-    print(databasetx)
+    # print(databasetx)
 
     fish_account_data = {loged_in_account_username: databasetx}
     # item = st.text_input(f'Fish type {i+1} ({fishselected[i]}):')
     # items.append(item)
 
     # Display the list of items
-    st.write(f'Items: {items}')
+    # st.write(f'Items: {items}')
     if st.button("Upload Data"):
         data = {"username": loged_in_account_username, "FishData": databasetx}
 
@@ -154,11 +154,11 @@ def fishRxData():
         st.success("Data Uploaded successfully !!!")
 
         #Backend Ml
-        st.write(databasetx)
-        abcd = 0
-        for item in databasetx:
-            st.write(f'databasetx-index {abcd} :  {databasetx[abcd]["fish_type"]}')
-            abcd += 1
+        # st.write(databasetx)
+        # abcd = 0
+        # for item in databasetx:
+        #     st.write(f'databasetx-index {abcd} :  {databasetx[abcd]["fish_type"]}')
+        #     abcd += 1
         delayValue = Backend_Ml(databasetx)
         send_delayData = {"a":delayValue}
         db.child("test").set(send_delayData)
@@ -170,7 +170,6 @@ def fishRxData():
         #     # inputNo = st.number_input('Pick a number', 0, 10)
         #     item = st.number_input(f'Fish {i+1} ({fishselected[i]}):')
         #     items.append(item)
-
 
 def Backend_Ml(databasetx):
     # fish food in grams [S,M,L] for different size where eg: goldfish[ [flakes], [pellets] ]
@@ -218,8 +217,8 @@ def Backend_Ml(databasetx):
                 for j in range(len(size)):
                     if databasetx[i]["fish_size"] == size[j]:
                         mydelay += fd_fish[fishes][0][j]
-                        st.write(f'{fishName[fishes]} : {fd_fish[fishes][0][j]}')
-    st.write("mydelay: ",mydelay)
+                        # st.write(f'{fishName[fishes]} : {fd_fish[fishes][0][j]}')
+    st.write("Total food in gram : ",mydelay)
     return mydelay
 
 
